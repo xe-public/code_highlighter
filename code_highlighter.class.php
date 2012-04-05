@@ -71,7 +71,7 @@ class code_highlighter extends EditorHandler
 	 **/
 	function transHTML($xml_obj)
 	{
-		$script_path = $this->component_path.'syntaxhighlighter/scripts/';
+		$script_path = getScriptPath().'modules/editor/components/code_highlighter/syntaxhighlighter/scripts/';
 		$code_type = ucfirst($xml_obj->attrs->code_type);
 		$option_title = ' title="'.$xml_obj->attrs->title.'"';
 		$option_first_line = $xml_obj->attrs->first_line;
