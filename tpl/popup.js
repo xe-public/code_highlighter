@@ -1,4 +1,4 @@
-function debugPrint(msg) {
+﻿function debugPrint(msg) {
 	if(typeof console == 'object' && typeof console.log == 'function')
 	{
 		console.log(msg);
@@ -15,10 +15,9 @@ function getCode()
 	if(!node || node.nodeName != 'DIV')
 	{
 		var code = opener.editorGetSelectedHtml(opener.editorPrevSrl);
-		code = jQuery(code).text();
 		code = getArrangedCode(code, 'textarea');
+//		code = jQuery(code).text();
 		form$.find('textarea[name=code]').val(code);
-		debugPrint('asdf');
 		return;
 	}
 
@@ -45,19 +44,26 @@ function insertCode()
 	var style = "border:#666 1px dotted;border-left:#2ae 5px solid;padding:5px;background:#FAFAFA url('./modules/editor/components/code_highlighter/code.png') no-repeat top right;";
 	var text = '<div editor_component="code_highlighter" code_type="'+opt.code_type+'" title="'+opt.title+'" first_line="'+opt.first_line+'" collapse="'+opt.collapse+'" highlight="'+opt.highlight+'" nogutter="'+opt.nogutter+'" style="'+style+'">'+opt.code+'</div>';
 
+	opener.editorFocus(opener.editorPrevSrl);
 	var iframe_obj = opener.editorGetIFrame(opener.editorPrevSrl);
-	try {
-		var prevNode = opener.editorPrevNode;
-		prevNode.parentNode.insertBefore(jQuery(text+'<br />').get(0), prevNode);
-		prevNode.parentNode.removeChild(prevNode);
-	} catch(e) {
-		try {
-			opener.editorReplaceHTML(iframe_obj, text);
-		} catch(ee) { }
-	};
+	var prevNode = opener.editorPrevNode;
+
+	if (prevNode && prevNode.nodeName == 'DIV' && prevNode.getAttribute('editor_component') != null) {
+		prevNode.setAttribute('code_type', opt.code_type);
+		prevNode.setAttribute('title', opt.title);
+		prevNode.setAttribute('first_line', opt.first_line);
+		prevNode.setAttribute('collapse', opt.collapse);
+		prevNode.setAttribute('highlight', opt.highlight);
+		prevNode.setAttribute('nogutter', opt.nogutter);
+		prevNode.setAttribute('style', style);
+	}
+	else
+	{
+		opener.editorReplaceHTML(iframe_obj, text);
+	}
 	opener.editorFocus(opener.editorPrevSrl);
 
-	window.close();
+/* 	window.close(); */
 }
 
 function getArrangedOption(elem$)
@@ -113,8 +119,11 @@ debugPrint(code);
 
 	if(outputType == 'textarea')
 	{
+		code = code.replace(/\s/g, "");
+		code = code.replace(/<p\s*[^>]*>/gi, "\n");
+		code = code.replace(/<br\s*\/?>/gi, "\n");
+		code = code.replace(/(<([^>]+)>)/gi,"");;
 		code = code.replace(/&nbsp;/g, ' ');
-		code = code.replace(/<br\s*\/?>\n?/gi, "\n");
 		code = code.replace(/&lt;/g, '<');
 		code = code.replace(/&gt;/g, '>');
 	}
