@@ -14,8 +14,8 @@
 	<description xml:lang="ru">Компонент служащий для подсветки кода</description>
 	<description xml:lang="zh-CN">高亮显示所选代码。</description>
 	<description xml:lang="zh-TW">將所選取的語法高亮度顯示。</description>
-	<version>1.2</version>
-	<date>2012-04-20</date>
+	<version>1.2.1</version>
+	<date>2012-04-21</date>
 	<license>MIT, GNU LGPL</license>
 	<link>http://xemagazine.com/</link>
 
