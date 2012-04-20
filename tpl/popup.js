@@ -1,12 +1,8 @@
-﻿function debugPrint(msg) {
-	if(typeof console == 'object' && typeof console.log == 'function')
-	{
-		console.log(msg);
-	}
-}
+﻿function debugPrint(msg) { if(typeof console == 'object' && typeof console.log == 'function') { console.log(msg); } }
 
 function getCode()
 {
+	debugPrint('>>> getCode()');
 	if(typeof(opener) == "undefined") return;
 
 	var node = opener.editorPrevNode;
@@ -35,16 +31,16 @@ function getCode()
 
 function insertCode()
 {
+	debugPrint('>>> insertCode()');
 	if(typeof(opener) == "undefined") return;
 
 	var form$ = jQuery('#fo');
 	var opt = getArrangedOption(form$);
 	opt.code = getArrangedCode(opt.code, 'wyswig');
 
-	var style = "border:#666 1px dotted;border-left:#2ae 5px solid;padding:5px;background:#FAFAFA url('./modules/editor/components/code_highlighter/code.png') no-repeat top right;";
-	var text = '<div editor_component="code_highlighter" code_type="'+opt.code_type+'" title="'+opt.title+'" first_line="'+opt.first_line+'" collapse="'+opt.collapse+'" highlight="'+opt.highlight+'" nogutter="'+opt.nogutter+'" style="'+style+'">'+opt.code+'</div>';
+	var style = "border:#666 1px dotted;border-left:#2AE 5px solid;padding:5px;background:#FAFAFA url('./modules/editor/components/code_highlighter/code.png') no-repeat top right;";
+	var html = '<div editor_component="code_highlighter" code_type="'+opt.code_type+'" title="'+opt.title+'" first_line="'+opt.first_line+'" collapse="'+opt.collapse+'" highlight="'+opt.highlight+'" nogutter="'+opt.nogutter+'" style="'+style+'">'+opt.code+'</div>';
 
-	opener.editorFocus(opener.editorPrevSrl);
 	var iframe_obj = opener.editorGetIFrame(opener.editorPrevSrl);
 	var prevNode = opener.editorPrevNode;
 
@@ -56,18 +52,22 @@ function insertCode()
 		prevNode.setAttribute('highlight', opt.highlight);
 		prevNode.setAttribute('nogutter', opt.nogutter);
 		prevNode.setAttribute('style', style);
+		prevNode.innerHTML = opt.code;
+		debugPrint('innerHTML');
 	}
 	else
 	{
-		opener.editorReplaceHTML(iframe_obj, text);
+		opener.editorReplaceHTML(iframe_obj, html);
+		debugPrint('editorReplaceHTML');
 	}
 	opener.editorFocus(opener.editorPrevSrl);
 
-/* 	window.close(); */
+	window.close();
 }
 
 function getArrangedOption(elem$)
 {
+	debugPrint('>>> getArrangedOption()');
 	if(!elem$.size()) return;
 
 	var node = elem$[0];
@@ -105,10 +105,9 @@ function getArrangedOption(elem$)
 
 function getArrangedCode(code, outputType)
 {
+	debugPrint('>>> getArrangedCode()');
 	if(!outputType) outputType = 'textarea';
 
-debugPrint('or');
-debugPrint(code);
 	if(outputType == 'wyswig')
 	{
 		code = code.replace(/</g, "&lt;");
@@ -120,8 +119,8 @@ debugPrint(code);
 	if(outputType == 'textarea')
 	{
 		code = code.replace(/\s/g, "");
-		code = code.replace(/<p\s*[^>]*>/gi, "\n");
-		code = code.replace(/<br\s*\/?>/gi, "\n");
+		code = code.replace(/<\/p>(\n)?/gi, "\n");
+		code = code.replace(/<br\s*\/?>(\n)?/gi, "\n");
 		code = code.replace(/(<([^>]+)>)/gi,"");;
 		code = code.replace(/&nbsp;/g, ' ');
 		code = code.replace(/&lt;/g, '<');
@@ -132,9 +131,6 @@ debugPrint(code);
 		code = code.replace(/</g, '&lt;');
 		code = code.replace(/>/g, '&gt;');
 	}
-
-debugPrint('Type : '+outputType);
-debugPrint(code);
 
 	code = jQuery.trim(code);
 	if(!code) code = '여기에 코드를 입력해주세요';
