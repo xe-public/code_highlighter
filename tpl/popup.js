@@ -118,9 +118,9 @@ function getArrangedCode(code, outputType)
 
 	if(outputType == 'textarea')
 	{
-		code = code.replace(/\s/g, "");
-		code = code.replace(/<\/p>(\n)?/gi, "\n");
-		code = code.replace(/<br\s*\/?>(\n)?/gi, "\n");
+		code = code.replace(/\r|\n/g, '');
+		code = code.replace(/<\/p>/gi, "\n");
+		code = code.replace(/<br\s*\/?>/gi, "\n");
 		code = code.replace(/(<([^>]+)>)/gi,"");;
 		code = code.replace(/&nbsp;/g, ' ');
 		code = code.replace(/&lt;/g, '<');
