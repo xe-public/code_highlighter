@@ -39,7 +39,7 @@ function insertCode()
 	opt.code = getArrangedCode(opt.code, 'wyswig');
 
 	var style = "border:#666 1px dotted;border-left:#2AE 5px solid;padding:5px;background:#FAFAFA url('./modules/editor/components/code_highlighter/code.png') no-repeat top right;";
-	var html = '<div editor_component="code_highlighter" code_type="'+opt.code_type+'" title="'+opt.title+'" first_line="'+opt.first_line+'" collapse="'+opt.collapse+'" highlight="'+opt.highlight+'" nogutter="'+opt.nogutter+'" style="'+style+'">'+opt.code+'</div>';
+	var html = '<div editor_component="code_highlighter" code_type="'+opt.code_type+'" title="'+opt.title+'" first_line="'+opt.first_line+'" collapse="'+opt.collapse+'" highlight="'+opt.highlight+'" nogutter="'+opt.nogutter+'" style="'+style+'">'+opt.code+'</div><br />';
 
 	var iframe_obj = opener.editorGetIFrame(opener.editorPrevSrl);
 	var prevNode = opener.editorPrevNode;
