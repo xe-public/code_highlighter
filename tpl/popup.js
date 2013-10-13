@@ -2,6 +2,7 @@
 
 function getCode()
 {
+	"use strict";
 	debugPrint('>>> getCode()');
 	if(typeof(opener) == "undefined") return;
 
@@ -31,6 +32,7 @@ function getCode()
 
 function insertCode()
 {
+	"use strict";
 	debugPrint('>>> insertCode()');
 	if(typeof(opener) == "undefined") return;
 
@@ -67,6 +69,7 @@ function insertCode()
 
 function getArrangedOption(elem$)
 {
+	"use strict";
 	debugPrint('>>> getArrangedOption()');
 	if(!elem$.size()) return;
 
@@ -105,6 +108,7 @@ function getArrangedOption(elem$)
 
 function getArrangedCode(code, outputType)
 {
+	"use strict";
 	debugPrint('>>> getArrangedCode()');
 	if(!outputType) outputType = 'textarea';
 
