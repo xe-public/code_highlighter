@@ -40,7 +40,7 @@ function insertCode()
 	var opt = getArrangedOption(form$);
 	opt.code = getArrangedCode(opt.code, 'wyswig');
 
-	var style = "border:#666 1px dotted;border-left:#2AE 5px solid;padding:5px;background:#FAFAFA url('./modules/editor/components/code_highlighter/code.png') no-repeat top right;";
+	var style = "font-family:'DejaVu Sans Mono', 'Courier New', Courier, monospace !important; border:#666 1px dotted;border-left:#2AE 5px solid;padding:5px;background:#FAFAFA url('./modules/editor/components/code_highlighter/component_icon.gif') no-repeat top right;";
 	var html = '<div editor_component="code_highlighter" code_type="'+opt.code_type+'" title="'+opt.title+'" first_line="'+opt.first_line+'" collapse="'+opt.collapse+'" highlight="'+opt.highlight+'" nogutter="'+opt.nogutter+'" style="'+style+'">'+opt.code+'</div><br />';
 
 	var iframe_obj = opener.editorGetIFrame(opener.editorPrevSrl);
@@ -137,7 +137,6 @@ function getArrangedCode(code, outputType)
 	}
 
 	code = jQuery.trim(code);
-	if(!code) code = '여기에 코드를 입력해주세요';
 
 	return code;
 }
