@@ -32,7 +32,31 @@
 	<extra_vars>
 		<var name="theme" type="select">
 			<title xml:lang="ko">테마</title>
-			<description xml:lang="ko">
+				<description xml:lang="ko">
+					<options value="Default">
+					<title xml:lang="ko">Default</title>
+				</options>
+				<options value="Django">
+					<title xml:lang="ko">Django</title>
+				</options>
+				<options value="Eclipse">
+					<title xml:lang="ko">Eclipse</title>
+				</options>
+				<options value="Emacs">
+					<title xml:lang="ko">Emacs</title>
+				</options>
+				<options value="FadeToGrey">
+					<title xml:lang="ko">FadeToGrey</title>
+				</options>
+				<options value="MDUltra">
+					<title xml:lang="ko">MDUltra</title>
+				</options>
+				<options value="Midnight">
+					<title xml:lang="ko">Midnight</title>
+				</options>
+				<options value="RDark">
+					<title xml:lang="ko">RDark</title>
+				</options>
 				<![CDATA[
 				다음 항목 중 하나를 입력하세요.
 				Default, Django, Eclipse, Emacs, FadeToGrey, MDUltra, Midnight, RDark
